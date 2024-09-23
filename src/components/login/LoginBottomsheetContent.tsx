@@ -2,6 +2,19 @@ import { IconButton } from '@components/button/CustomButton';
 import * as S from './LoginBottomsheetContent.styled';
 
 const LoginBottomsheetContent = () => {
+  // 카카오 로그인 테스트
+  const kakaoParams = {
+    client_id: import.meta.env.VITE_KAKAO_CLIENT_ID,
+    redirect_uri: import.meta.env.VITE_KAKAO_REDIRECT_URI,
+    response_type: 'code',
+  };
+  const kParams = new URLSearchParams(kakaoParams).toString();
+  const kakaoLoginUrl = `https://kauth.kakao.com/oauth/authorize?${kParams}`;
+
+  const handleKakaoLogin = () => {
+    window.location.href = kakaoLoginUrl;
+  };
+
   return (
     <S.LoginBottomsheetContentWrapper>
       <S.LoginBottomsheetContentTopWrapper>
@@ -14,7 +27,7 @@ const LoginBottomsheetContent = () => {
         </S.LoginBottomsheetContentTopSubTitle>
       </S.LoginBottomsheetContentTopWrapper>
 
-      <S.LoginBottomsheetContentButton>
+      <S.LoginBottomsheetContentButton onClick={handleKakaoLogin}>
         <IconButton icon="kakao_kakao" iconSize="1.5rem" />
         <S.LoginBottomsheetContentButtonText>
           카카오 로그인으로 시작하기
